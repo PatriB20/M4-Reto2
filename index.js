@@ -78,24 +78,32 @@ connection.connect(function(error)
 // })
 //RETO2
 //OBTEN EL ID Y LA NOTA DE LOS ALUMNOS QUE TENGAN UN ID ENTRE 1 Y 20 O QUE LA NOTA SEA SUPERIOR A 8 Y LA FECHA SEA DEL AÑO PASADO
-let sql = "SELECT id_estudiantes, nota  FROM NOTAS WHERE (id_estudiantes BETWEEN 1 and 20 )OR (nota>8 and fecha BETWEEN '20201231' AND '20200101')"
+// let sql = "SELECT id_estudiantes, nota  FROM NOTAS WHERE (id_estudiantes BETWEEN 1 and 20 )OR (nota>8 and fecha BETWEEN '20201231' AND '20200101')"
 
-connection.query(sql,function(error, resultado){
-    if (error)
-        console.log(error)
-    else
-        console.log("Datos alumnos que han ingresado en 2021")
-        console.log(resultado)
-})
-
-
-
-//OBTEN LA MEDIA ARITMETICA DE LAS NOTAS QUE SE HAN DADO EN EL ULTIMO AÑO 
-// let sql = "SELECT AVG (nota) FROM NOTAS AND fecha BETWEEN '20201231' AND '20200101'"
 // connection.query(sql,function(error, resultado){
 //     if (error)
 //         console.log(error)
 //     else
-//         console.log("Nota media estudiantes en la asignatura 1")
+//         console.log("Datos alumnos que han ingresado en 2021")
+//         console.log(resultado)
+// })
+
+//MEDIA DE LAS NOTAS POR ESTUDIANTE
+let sql = "SELECT AVG(nota) FROM NOTAS WHERE fecha BETWEEN '20200101' AND '20201231' GROUP BY id_estudiantes"
+connection.query(sql,function(error, resultado){
+    if (error)
+        console.log(error)
+    else
+        console.log("Nota media estudiante en el año 2020")
+        console.log(resultado)
+})
+
+//OBTEN LA MEDIA ARITMETICA DE LAS NOTAS QUE SE HAN DADO EN EL ULTIMO AÑO POR ASIGNATURA
+// let sql = "SELECT AVG(nota) FROM NOTAS WHERE fecha BETWEEN '20200101' AND '20201231' GROUP BY id_asignatura"
+// connection.query(sql,function(error, resultado){
+//     if (error)
+//         console.log(error)
+//     else
+//         console.log("Nota media por asignatura en el año 2020")
 //         console.log(resultado)
 // })
